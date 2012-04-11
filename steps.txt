@@ -5,14 +5,14 @@ rake db:create
 rake db:migrate
 #started app with rails s and created 2 posts
 
-#create the engine
+#create the engine. Out of the my_app dir run:
 rails plugin new shared_model
-#create the model dir
+#create the model dir. Inside the engine dir run:
 mkdir app/models/shared_model/
-#move the post model
+#move the post model. If the both projects root_dir are in the same directory, run inside the app dir:
 mv app/models/post.rb ../shared_model/app/models/shared_model/
 
-#editmodel to add module in class file
+#edit model to add module in class file
 
 #generate migration to rename class
 rails g migration rename_posts_to_shared_model_posts
@@ -30,5 +30,5 @@ rake shared_model:install:migrations
 
 #edit PostsController and add the module prefix SharedModel to all references to Post class.
 
-#runs the app again and every thing should be working as well before the update
+#runs the app again and everything should be working as well before the update
 
