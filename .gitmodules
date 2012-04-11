@@ -1,0 +1,3 @@
+[submodule "vendor/engines/shared_model"]
+	path = vendor/engines/shared_model
+	url = git@github.com:davidpaniz/test_engine_shared_model.git
