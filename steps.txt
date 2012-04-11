@@ -1,0 +1,34 @@
+rails new my_app
+cd my_app
+rails g scaffold post title:string body:text
+rake db:create
+rake db:migrate
+#started app with rails s and created 2 posts
+
+#create the engine
+rails plugin new shared_model
+#create the model dir
+mkdir app/models/shared_model/
+#move the post model
+mv app/models/post.rb ../shared_model/app/models/shared_model/
+
+#editmodel to add module in class file
+
+#generate migration to rename class
+rails g migration rename_posts_to_shared_model_posts
+#all work here is done. Now, back to outer app
+
+#install the engine into vendor/engines as a git submodule
+mkdir vendor/engines
+git submodule add git@github.com:davidpaniz/test_engine_shared_model.git vendor/engines/shared_model
+
+#configure Gemfile adding: gem 'shared_model', path: 'vendor/engines/shared_model'
+#probably some bug, but I had to update rails version to 3.2.3 and run a bundle update
+
+#rake db:migrate does NOT run engine migrations, so we have to copy them with the following command:
+rake shared_model:install:migrations
+
+#edit PostsController and add the module prefix SharedModel to all references to Post class.
+
+#runs the app again and every thing should be working as well before the update
+
